@@ -1,6 +1,7 @@
-import React from 'react'
-import * as BooksAPI from './BooksAPI'
-import './App.css'
+import React from 'react';
+import * as BooksAPI from './BooksAPI';
+import './App.css';
+import Shelf from './Shelf';
 
 class BooksApp extends React.Component {
   state = {
@@ -20,16 +21,24 @@ class BooksApp extends React.Component {
       this.setState({
         books: books,
         shelves: {
-          currentlyReading: books.filter((book)=> {return book.shelf === 'currentlyReading'}),
-          wantToRead: books.filter((book)=> {return book.shelf === 'wantToRead'}),
-          read: books.filter((book)=> {return book.shelf === 'read'})
+          currentlyReading: {
+            header: 'Currently Reading',
+            books: books.filter((book)=> {return book.shelf === 'currentlyReading'}),
+          },
+          wantToRead: {
+            header: 'Want to Read',
+            books: books.filter((book)=> {return book.shelf === 'wanToRead'}),
+          },
+          read: {
+            header: 'Read',
+            books: books.filter((book)=> {return book.shelf === 'read'}),
+          },
         }
       });
     });
   }
 
   render() {
-    console.log(this.state.shelves);
     return (
       <div className="app">
         {this.state.showSearchPage ? (
@@ -59,6 +68,7 @@ class BooksApp extends React.Component {
               <h1>MyReads</h1>
             </div>
             <div className="list-books-content">
+              <Shelf shelves={this.state.shelves} />
               <div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Currently Reading</h2>
