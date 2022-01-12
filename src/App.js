@@ -1,5 +1,4 @@
 import React from 'react';
-import * as BooksAPI from './BooksAPI';
 import './App.css';
 import Shelf from './Shelf';
 
@@ -12,30 +11,6 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     showSearchPage: false,
-    books: '',
-    shelves: '',
-  }
-
-  componentDidMount() {
-    BooksAPI.getAll().then((books)=> {
-      this.setState({
-        books: books,
-        shelves: {
-          currentlyReading: {
-            header: 'Currently Reading',
-            books: books.filter((book)=> {return book.shelf === 'currentlyReading'}),
-          },
-          wantToRead: {
-            header: 'Want to Read',
-            books: books.filter((book)=> {return book.shelf === 'wanToRead'}),
-          },
-          read: {
-            header: 'Read',
-            books: books.filter((book)=> {return book.shelf === 'read'}),
-          },
-        }
-      });
-    });
   }
 
   render() {
@@ -68,7 +43,7 @@ class BooksApp extends React.Component {
               <h1>MyReads</h1>
             </div>
             <div className="list-books-content">
-              <Shelf shelves={this.state.shelves} />
+              <Shelf />
             </div>
             <div className="open-search">
               <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>

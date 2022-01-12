@@ -1,15 +1,15 @@
 import React from 'react';
 
 function BookGrid(props) {
-  return(
+  return (
     <ol className="books-grid">
       {props.books.map((book)=>(
-        <li key={book.title}>
+        <li key={book.id}>
           <div className="book">
             <div className="book-top">
               <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
               <div className="book-shelf-changer">
-                <select>
+                <select value={book.shelf} onChange={(event)=> {props.update(book, event.target.value)}}>
                   <option value="move" disabled>Move to...</option>
                   <option value="currentlyReading">Currently Reading</option>
                   <option value="wantToRead">Want to Read</option>
@@ -19,7 +19,7 @@ function BookGrid(props) {
               </div>
             </div>
             <div className="book-title">{book.title}</div>
-            <div className="book-authors">{book.author}</div>
+            <div className="book-authors">{book.authors}</div>
           </div>
         </li>
       ))}
@@ -29,20 +29,18 @@ function BookGrid(props) {
 
 class Books extends React.Component {
 
-  render() {
-    console.log(this.props.books);
+    render() {
     if (this.props.books.length) {
-    return (
-        <BookGrid books={this.props.books} />
+      return (
+        <BookGrid books={this.props.books} update={this.props.update} />
       )
     } else {
       return (
-        <div>
-          <h3>You do not have books on this shelf yet.</h3>
+        <div className="no-books">
+          <h3>There are no books on this shelf yet.</h3>
         </div>
       )
     }
-
   }
 }
 
