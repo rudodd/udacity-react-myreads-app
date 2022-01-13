@@ -1,5 +1,9 @@
 import React from 'react';
 
+function Authors(props) {
+  return (props.book.authors ? props.book.authors.map((author)=>{return <p key={author} className="author">{author}</p>}) : null);
+}
+
 function BookGrid(props) {
   return (
     <ol className="books-grid">
@@ -7,7 +11,9 @@ function BookGrid(props) {
         <li key={book.id}>
           <div className="book">
             <div className="book-top">
-              <div className="book-cover" style={{ width: 125, height: 190, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
+              <div className="book-cover" style={{ width: 125, height: 190 }}>
+                <img src={book.imageLinks ? book.imageLinks.thumbnail : require('./images/no-img.png')} alt={book.title} />
+              </div>
               <div className="book-shelf-changer">
                 <select value={book.shelf ? book.shelf : 'none'} onChange={(event)=> {props.update(book, event.target.value)}}>
                   <option value="move" disabled>Move to...</option>
@@ -19,7 +25,7 @@ function BookGrid(props) {
               </div>
             </div>
             <div className="book-title">{book.title}</div>
-            <div className="book-authors">{book.authors}</div>
+            <div className="book-authors"><Authors book={book} /></div>
           </div>
         </li>
       ))}

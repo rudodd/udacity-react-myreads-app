@@ -15,7 +15,7 @@ function BookShelf() {
       </div>
       <div className="open-search">
         <Link
-          to='/add'
+          to='/search'
           className="search-button"
         >Add a book</Link>
       </div>
@@ -29,7 +29,7 @@ class App extends React.Component {
     return (
       <div className="app">
         <Routes>
-          <Route exact path='/add' element={<Search />} />
+          <Route exact path='/search' element={<Search />} />
           <Route path='/' element={<BookShelf />} />
         </Routes>
       </div>
