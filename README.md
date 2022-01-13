@@ -18,8 +18,6 @@ The main page also has a link to '/search', a search page that allows you to fin
 
 The search page has a text input that may be used to find books. As the value of the text input changes, the books that match that query are displayed on the page, along with a control that lets you add the book to your library.
 
-## TL;DR
-
 ## To test the app:
 
 * install all project dependencies with `yarn install`
