@@ -61,7 +61,7 @@ class Shelf extends React.Component {
           <div key={key} className="bookshelf">
             <h2 className="bookshelf-title">{this.state.shelves[key].header}</h2>
             <div className="bookshelf-books">
-              <Books books={this.state.shelves[key].books} update={this.updateBook} />
+              <Books books={this.state.shelves[key].books} update={this.updateBook} emptyMessage={'There are no books added to this shelf yet.'} />
             </div>
           </div>
         ))}

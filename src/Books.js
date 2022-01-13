@@ -7,9 +7,9 @@ function BookGrid(props) {
         <li key={book.id}>
           <div className="book">
             <div className="book-top">
-              <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
+              <div className="book-cover" style={{ width: 125, height: 190, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
               <div className="book-shelf-changer">
-                <select value={book.shelf} onChange={(event)=> {props.update(book, event.target.value)}}>
+                <select value={book.shelf ? book.shelf : 'none'} onChange={(event)=> {props.update(book, event.target.value)}}>
                   <option value="move" disabled>Move to...</option>
                   <option value="currentlyReading">Currently Reading</option>
                   <option value="wantToRead">Want to Read</option>
@@ -37,7 +37,7 @@ class Books extends React.Component {
     } else {
       return (
         <div className="no-books">
-          <h3>There are no books on this shelf yet.</h3>
+          <h3>{this.props.emptyMessage}</h3>
         </div>
       )
     }
